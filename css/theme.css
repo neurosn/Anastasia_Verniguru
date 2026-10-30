@@ -1,0 +1,149 @@
+/* =========================================================
+   Ночная тема — «вечер при свечах»: тёплый тёмно-коричневый
+   фон, кремовый текст, золото остаётся главным акцентом.
+   Включается атрибутом data-theme="dark" на <html>.
+   ========================================================= */
+
+/* --- Палитра --- */
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --cream:#15110e;        /* фон страницы */
+  --cream-dark:#1d1814;
+  --card-bg:#211b16;      /* карточки */
+  --gold:#d4b25c;
+  --gold-light:#e8c97a;
+  --gold-pale:#3a2f1c;    /* подложки иконок */
+  --text-dark:#f3ebe0;
+  --text-mid:#d2c4b2;
+  --border:rgba(212,178,92,.18);
+  --m-gold:#d4b25c;
+  --night-raise:#2a221b;  /* чуть светлее карточки */
+}
+html:root[data-theme="dark"]{ --text-light:#a99a87; }
+
+/* --- Основа страницы --- */
+[data-theme="dark"] body,
+[data-theme="dark"] main.landing-public-mode{ background:var(--cream) !important; color:var(--text-mid); }
+[data-theme="dark"] body.landing-page-transition::after{ background:#15110e; }
+[data-theme="dark"] ::selection{ background:rgba(212,178,92,.35); color:#fff; }
+
+/* --- Первый экран --- */
+/* компьютер: тёмный фон с теми же золотыми линиями и лотосом */
+[data-theme="dark"] #b14415 > section{
+  --bg-url:url('../images/group_57_dark.png') !important;
+  --bg-url-2x:url('../images/group_57_dark.png') !important;
+  position:relative;
+}
+/* тёплое свечение за фотографией */
+[data-theme="dark"] #b14415 > section::before{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(ellipse 40% 60% at 68% 55%, rgba(212,178,92,.13), transparent 70%);
+}
+[data-theme="dark"] #b14415 .container{ position:relative; z-index:1; }
+[data-theme="dark"] #b14415 .landing-block-node-title,
+[data-theme="dark"] #b14415 .landing-block-node-text{ --color:#f3ebe0 !important; color:#f3ebe0 !important; }
+
+/* телефон: светлая картинка-обложка заменяется «живым» первым экраном с прозрачным фото */
+[data-theme="dark"] #b14419,
+[data-theme="dark"] #b14425{ display:none !important; }
+[data-theme="dark"] #b14415 > section.l-d-xs-none{ display:block !important; }
+@media (max-width:767px){
+  [data-theme="dark"] #b14415 > section{ padding-top:28px !important; padding-bottom:36px !important;
+    --bg-url:none !important; --bg-url-2x:none !important; background:linear-gradient(180deg,#15110e 0%,#1d1814 100%) !important; }
+  /* фото сверху, текст и кнопки под ним */
+  [data-theme="dark"] #b14415 .row{ flex-direction:column-reverse; }
+  [data-theme="dark"] #b14415 .landing-block-node-img{ max-width:78%; margin:0 auto -6px; display:block;
+    -webkit-mask-image:linear-gradient(#000 82%,transparent); mask-image:linear-gradient(#000 82%,transparent); }
+  [data-theme="dark"] #b14415 .landing-block-node-title{ font-size:2.6rem !important; }
+  [data-theme="dark"] #b14415 .landing-block-node-text{ font-size:1.9rem !important; }
+  [data-theme="dark"] #b14415 > section::before{ background:radial-gradient(ellipse 80% 40% at 50% 78%, rgba(212,178,92,.14), transparent 70%); }
+}
+
+/* кнопки первого экрана */
+[data-theme="dark"] #b14415 .g-btn-type-outline{
+  --button-color:#d4b25c !important; color:#e8d6ad !important; border-color:rgba(212,178,92,.6) !important;
+}
+[data-theme="dark"] #b14415 .g-btn-type-outline:hover{ background:rgba(212,178,92,.12) !important; color:#fff !important; }
+
+/* --- Блоки основного сайта с «зашитым» светлым фоном --- */
+[data-theme="dark"] #hero-block,
+[data-theme="dark"] .cta-box{ background:var(--cream-dark) !important; }
+[data-theme="dark"] [style*="#F8F6F3"],
+[data-theme="dark"] [style*="#f8f6f3"]{ background:var(--cream-dark) !important; }
+[data-theme="dark"] div[style*="background: #fff"]{ background:var(--card-bg) !important; box-shadow:0 4px 24px rgba(0,0,0,.35) !important; }
+
+[data-theme="dark"] .card-icon,
+[data-theme="dark"] .modal-icon,
+[data-theme="dark"] .quest-icon,
+[data-theme="dark"] div[style*="#f9f1dc"]{ background:linear-gradient(135deg,#3a2f1c 0%,#2c2416 100%) !important; }
+
+[data-theme="dark"] .vthumb{ background:linear-gradient(135deg,#2a221b,#1d1814) !important; }
+[data-theme="dark"] .play-btn{ background:rgba(33,27,22,.9) !important; }
+[data-theme="dark"] .modal-cta,
+[data-theme="dark"] .success-message{ background:linear-gradient(135deg,#2c2416 0%,#211b16 100%) !important; }
+
+/* карточки и строки прайса: мягкая тень вместо светлой */
+[data-theme="dark"] .nav-card:hover,
+[data-theme="dark"] .m-price:hover{ box-shadow:0 12px 32px rgba(0,0,0,.45), 0 0 0 1px rgba(212,178,92,.25) !important; }
+[data-theme="dark"] .nav-card::before{ opacity:.35; }
+
+/* модальное окно */
+[data-theme="dark"] .modal-overlay{ background:rgba(8,6,4,.72); }
+[data-theme="dark"] .modal-close{ background:var(--night-raise) !important; color:var(--text-mid) !important; }
+
+/* бейджи «новое» / «важно» — приглушённее на тёмном */
+[data-theme="dark"] .badge{ filter:saturate(.8) brightness(.95); }
+
+/* --- Страницы анкет --- */
+[data-theme="dark"] .form-input,
+[data-theme="dark"] .form-textarea{ background:var(--night-raise) !important; color:var(--text-dark) !important; border-color:rgba(212,178,92,.2) !important; }
+[data-theme="dark"] .form-input::placeholder,
+[data-theme="dark"] .form-textarea::placeholder{ color:#8a7b69 !important; }
+[data-theme="dark"] .form-input:focus,
+[data-theme="dark"] .form-textarea:focus{ background:#30271f !important; border-color:var(--gold) !important; }
+[data-theme="dark"] .radio-option{ background:var(--night-raise) !important; color:var(--text-mid) !important; border-color:rgba(212,178,92,.2) !important; }
+[data-theme="dark"] .radio-option:hover{ background:#30271f !important; }
+[data-theme="dark"] .form-intro{ background:linear-gradient(135deg,#2c2416,#211b16) !important; color:var(--text-mid) !important; }
+
+/* --- Полоса прокрутки --- */
+[data-theme="dark"]{ scrollbar-color:#3a2f1c #15110e; }
+
+/* --- Кнопка переключения темы --- */
+.theme-toggle{
+  position:fixed; top:16px; right:16px; z-index:10000;
+  width:44px; height:44px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid rgba(201,168,76,.35);
+  background:rgba(255,255,255,.75); color:#b89637;
+  -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+  box-shadow:0 4px 18px rgba(180,150,120,.18);
+  cursor:pointer; padding:0;
+  transition:transform .4s cubic-bezier(.22,.61,.36,1), box-shadow .4s, background .4s, color .4s, border-color .4s;
+}
+.theme-toggle:hover{ transform:translateY(-2px) rotate(-8deg); box-shadow:0 8px 24px rgba(201,168,76,.3); }
+.theme-toggle:focus-visible{ outline:2px solid #c9a84c; outline-offset:3px; }
+.theme-toggle svg{ width:20px; height:20px; transition:transform .6s cubic-bezier(.22,.61,.36,1), opacity .4s; }
+.theme-toggle .i-sun{ position:absolute; opacity:0; transform:rotate(-90deg) scale(.5); }
+[data-theme="dark"] .theme-toggle{ background:rgba(33,27,22,.75); color:#e8c97a; border-color:rgba(212,178,92,.4); box-shadow:0 4px 18px rgba(0,0,0,.4); }
+[data-theme="dark"] .theme-toggle .i-moon{ opacity:0; transform:rotate(90deg) scale(.5); }
+[data-theme="dark"] .theme-toggle .i-sun{ opacity:1; transform:none; }
+@media (max-width:767px){ .theme-toggle{ top:12px; right:12px; width:40px; height:40px; } }
+
+/* --- Смена темы: мягкое «раскрытие» кругом от кнопки --- */
+::view-transition-old(root), ::view-transition-new(root){ mix-blend-mode:normal; }
+html.theme-switching::view-transition-old(root){ animation:none; }
+html.theme-switching::view-transition-new(root){ animation:theme-reveal .8s cubic-bezier(.22,.61,.36,1) both; }
+@keyframes theme-reveal{ from{ clip-path:circle(0 at var(--tx,100%) var(--ty,0)); } to{ clip-path:circle(var(--tr,150vmax) at var(--tx,100%) var(--ty,0)); } }
+/* запасной вариант без View Transitions: плавная смена цветов */
+html.theme-fade, html.theme-fade *{ transition:background-color .5s ease, color .5s ease, border-color .5s ease !important; }
+
+@media (prefers-reduced-motion: reduce){
+  html.theme-switching::view-transition-new(root){ animation:none; }
+}
+
+/* --- Блок «ПРАЙС» с описаниями диагностик (свои цвета прописаны прямо в разметке) --- */
+[data-theme="dark"] section[style*="#faf8f5"]{ background:var(--cream) !important; }
+[data-theme="dark"] section[style*="#faf8f5"] [style*="#3d2b1f"]{ color:var(--text-dark) !important; }
+[data-theme="dark"] section[style*="#faf8f5"] [style*="#5a4030"]{ color:var(--text-mid) !important; }
+[data-theme="dark"] section[style*="#faf8f5"] [style*="#8a7060"]{ color:var(--text-light) !important; }
+[data-theme="dark"] section[style*="#faf8f5"] strong{ color:var(--text-dark); }
