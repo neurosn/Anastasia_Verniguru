@@ -37,7 +37,7 @@ html:root[data-theme="dark"]{ --text-light:#a99a87; }
 /* тёплое свечение за фотографией */
 [data-theme="dark"] #b14415 > section::before{
   content:""; position:absolute; inset:0; pointer-events:none;
-  background:radial-gradient(ellipse 40% 60% at 68% 55%, rgba(212,178,92,.13), transparent 70%);
+  background:radial-gradient(ellipse 34% 55% at 70% 50%, rgba(212,178,92,.16), transparent 72%);
 }
 [data-theme="dark"] #b14415 .container{ position:relative; z-index:1; }
 [data-theme="dark"] #b14415 .landing-block-node-title,
@@ -52,8 +52,7 @@ html:root[data-theme="dark"]{ --text-light:#a99a87; }
     --bg-url:none !important; --bg-url-2x:none !important; background:linear-gradient(180deg,#15110e 0%,#1d1814 100%) !important; }
   /* фото сверху, текст и кнопки под ним */
   [data-theme="dark"] #b14415 .row{ flex-direction:column-reverse; }
-  [data-theme="dark"] #b14415 .landing-block-node-img{ max-width:78%; margin:0 auto -6px; display:block;
-    -webkit-mask-image:linear-gradient(#000 82%,transparent); mask-image:linear-gradient(#000 82%,transparent); }
+  [data-theme="dark"] #b14415 .landing-block-node-img{ max-width:94%; margin:0 auto -14px; display:block; }
   [data-theme="dark"] #b14415 .landing-block-node-title{ font-size:2.6rem !important; }
   [data-theme="dark"] #b14415 .landing-block-node-text{ font-size:1.9rem !important; }
   [data-theme="dark"] #b14415 > section::before{ background:radial-gradient(ellipse 80% 40% at 50% 78%, rgba(212,178,92,.14), transparent 70%); }

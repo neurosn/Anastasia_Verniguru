@@ -4,7 +4,21 @@
   var KEY = 'verniguru-theme';
   function current(){ return root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'; }
   function save(t){ try{ localStorage.setItem(KEY, t); }catch(e){} }
-  function apply(t){ root.setAttribute('data-theme', t); }
+  function apply(t){ root.setAttribute('data-theme', t); syncPhoto(); }
+
+  // фото на первом экране: для ночи — отдельная версия (тёплый тон, мягкий край, растворение снизу)
+  function syncPhoto(){
+    var img = document.querySelector('#b14415 .landing-block-node-img');
+    if (!img) return;
+    var day = img.getAttribute('data-day-src') || img.getAttribute('data-src') || img.getAttribute('src');
+    if (!day || day.indexOf('data:') === 0) return;
+    img.setAttribute('data-day-src', day);
+    var night = day.replace(/[^\/]+$/, 'photo_night.png');
+    var want = current() === 'dark' ? night : day;
+    if (img.getAttribute('src') !== want) img.setAttribute('src', want);
+  }
+  document.addEventListener('DOMContentLoaded', function(){ setTimeout(syncPhoto, 0); });
+  window.addEventListener('load', syncPhoto);
 
   function build(){
     var b = document.createElement('button');
