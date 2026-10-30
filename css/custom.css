@@ -9,3 +9,16 @@ html:root{--text-light:#6e6156}
 .pill{font-size:.8rem}
 /* Боковая навигация чуть шире, чтобы пункты не переносились */
 @media (min-width:1024px){.sidebar{width:270px !important;flex:0 0 270px !important;min-width:270px}}
+/* Мобильные: длинные заголовки разделов переносятся и не раздвигают страницу */
+@media (max-width:767px){
+  .section-header-line{white-space:normal !important;letter-spacing:.2em !important;line-height:1.5}
+}
+/* Страховка от горизонтальной прокрутки на телефонах */
+html,body{overflow-x:clip}
+
+/* Мобильные: прайс-лист помещается в ширину экрана */
+@media (max-width:767px){
+  div[style*="padding: 36px 32px"]{padding:28px 14px !important}
+  div[style*="display: grid; gap: 14px"] > div{min-width:0}
+  div[style*="padding: 20px 24px"][style*="display: flex"]{padding:16px 14px !important;gap:12px !important}
+}
