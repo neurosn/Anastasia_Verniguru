@@ -1,0 +1,11 @@
+/* Улучшения читаемости (поверх оригинального дизайна) */
+/* Битрикс задавал базовый размер 14px, а дизайн рассчитан на rem от 16px */
+html{font-size:16px !important}
+/* Чуть темнее второстепенный текст — лучше контраст на кремовом фоне */
+html:root{--text-light:#6e6156}
+/* Мелкие подписи и метки */
+.section-header-line{font-size:.8rem}
+.badge{font-size:.7rem}
+.pill{font-size:.8rem}
+/* Боковая навигация чуть шире, чтобы пункты не переносились */
+@media (min-width:1024px){.sidebar{width:270px !important;flex:0 0 270px !important;min-width:270px}}
