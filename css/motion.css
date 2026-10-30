@@ -1,0 +1,86 @@
+/* =========================================================
+   Анимации и переходы — мягкие, «дышащие», в золотой гамме.
+   Общий ритм: 0.9–1.1 c, плавное замедление в конце.
+   ========================================================= */
+:root{
+  --m-ease: cubic-bezier(.22,.61,.36,1);
+  --m-gold: #c9a84c;
+}
+
+/* --- 1. Переходы между страницами (главная ↔ анкеты) --- */
+@view-transition{ navigation:auto; }
+::view-transition-old(root){ animation:m-page-out .35s ease both; }
+::view-transition-new(root){ animation:m-page-in .6s var(--m-ease) both; }
+@keyframes m-page-out{ to{ opacity:0; } }
+@keyframes m-page-in{ from{ opacity:0; transform:translateY(10px); } }
+
+/* Белая заставка Битрикса при открытии страницы — короче и мягче */
+body.landing-page-transition::after{ animation-duration:.9s !important; animation-delay:.1s !important; }
+
+/* --- 2. Плавная прокрутка по пунктам меню --- */
+html{ scroll-behavior:smooth; }
+section[id]{ scroll-margin-top:24px; }
+
+/* --- 3. Первый экран (компьютер): имя, подзаголовок и кнопки появляются по очереди --- */
+.m-js #b14415 .landing-block-node-title,
+.m-js #b14415 .landing-block-node-text,
+.m-js #b14415 [class*="landing-block-node-containerbuttons"]{
+  opacity:0; animation:m-rise 1.1s var(--m-ease) forwards;
+}
+.m-js #b14415 .landing-block-node-title{ animation-name:m-rise-title; animation-delay:.25s; }
+.m-js #b14415 .landing-block-node-text{ animation-delay:.6s; }
+.m-js #b14415 [class*="landing-block-node-containerbuttons"]{ animation-delay:.9s; }
+@keyframes m-rise{ from{ opacity:0; transform:translateY(18px); } to{ opacity:1; transform:none; } }
+@keyframes m-rise-title{ from{ opacity:0; transform:translateY(14px); letter-spacing:.12em; filter:blur(3px); }
+                          to{ opacity:1; transform:none; filter:none; } }
+
+/* Кнопки первого экрана: мягкий золотой отблеск при наведении, как у кнопок ниже */
+#b14415 .btn, #b14425 .btn{ position:relative; overflow:hidden; transition:transform .4s var(--m-ease), box-shadow .4s var(--m-ease), background-color .4s, color .4s; }
+#b14415 .btn::after, #b14425 .btn::after{
+  content:""; position:absolute; top:0; left:-120%; width:60%; height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);
+  transform:skewX(-20deg); transition:left .9s var(--m-ease); pointer-events:none;
+}
+#b14415 .btn:hover, #b14425 .btn:hover{ transform:translateY(-2px); box-shadow:0 10px 26px rgba(201,168,76,.28); }
+#b14415 .btn:hover::after, #b14425 .btn:hover::after{ left:140%; }
+
+/* --- 4. Появление карточек и строк прайса при прокрутке (по очереди) --- */
+.m-js .m-item{
+  opacity:0; transform:translateY(22px) scale(.985);
+  transition:opacity .9s var(--m-ease), transform .9s var(--m-ease);
+  transition-delay:var(--m-d,0s);
+}
+.m-js .m-item.m-in{ opacity:1; transform:none; }
+/* старая анимация карточек срабатывала сразу при загрузке, ещё до прокрутки — заменяем */
+.m-js .cards-grid .nav-card, .m-js .video-grid .video-card{ animation:none; }
+
+/* Строки прайса: лёгкий подъём при наведении, как у карточек */
+.m-price{ transition:transform .4s var(--m-ease), box-shadow .4s var(--m-ease), border-color .4s; }
+.m-price:hover{ transform:translateY(-3px); box-shadow:0 10px 28px rgba(201,168,76,.14); border-color:var(--m-gold) !important; }
+
+/* --- 5. Заголовки разделов: золотая линия «прорисовывается» --- */
+.m-js .section-header{ position:relative; }
+.m-js .section-header::after{
+  content:""; flex:1; height:1px; min-width:24px;
+  background:linear-gradient(90deg,var(--m-gold),rgba(201,168,76,0));
+  transform:scaleX(0); transform-origin:left; opacity:.7;
+  transition:transform 1.4s var(--m-ease) .15s;
+}
+.m-js .section-header.m-in::after{ transform:scaleX(1); }
+
+/* --- 6. Тонкая золотая полоса прогресса чтения сверху --- */
+.m-progress{
+  position:fixed; top:0; left:0; height:2px; width:100%; z-index:9999; pointer-events:none;
+  background:linear-gradient(90deg,rgba(201,168,76,.15),var(--m-gold) 60%,#e8cd9d);
+  transform:scaleX(0); transform-origin:left;
+}
+
+/* --- Уважение к настройке «Уменьшить движение» --- */
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  .m-js .m-item, .m-js #b14415 .landing-block-node-title, .m-js #b14415 .landing-block-node-text,
+  .m-js #b14415 [class*="landing-block-node-containerbuttons"]{ opacity:1 !important; transform:none !important; animation:none !important; transition:none !important; filter:none !important; }
+  .m-js .section-header::after{ transform:none; transition:none; }
+  .m-progress{ display:none; }
+  ::view-transition-old(root), ::view-transition-new(root){ animation:none; }
+}
